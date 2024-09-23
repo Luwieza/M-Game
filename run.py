@@ -1,7 +1,7 @@
 from random import randint
 import time
 import os
-
+from colorama import Fore
 
 # Initialize boards
 hidden_board = [["_"] * 9 for x in range(9)]
@@ -14,7 +14,7 @@ letters_to_numbers = {chr(65+i): i for i in range(9)}  # A-I
 
 continue_game_options = ['ok', 'end game']
 
-def clear():
+def clear():1
     """Clear the terminal."""
     os.system("cls" if os.name == "nt" else "clear")
 
