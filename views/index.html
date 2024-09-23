@@ -1,15 +1,15 @@
 <body>
-    <button onclick="window.location.reload()">Run Program</button>
+    <button id="click-me-button">PLAY GAME</button>
     <div id="terminal"></div>
 
     <script>
-        var term = new Terminal({
+        const term = new Terminal({
             cols: 80,
             rows: 24
         });
-        term.open(document.getElementById('terminal'));
+        term.open(document.getElementById('terminal')); 
         term.writeln('Running startup command: python3 run.py');
-        term.writeln('');
+
 
         var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
             ':' + location.port) : '') + '/');
