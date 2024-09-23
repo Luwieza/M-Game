@@ -1,7 +1,7 @@
 from random import randint
 import time
 import os
-
+from colorama import Fore
 
 # Initialize boards
 hidden_board = [["_"] * 9 for x in range(9)]
