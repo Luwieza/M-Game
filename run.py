@@ -14,7 +14,7 @@ letters_to_numbers = {chr(65+i): i for i in range(9)}  # A-I
 
 continue_game_options = ['ok', 'end game']
 
-def clear():1
+def clear():
     """Clear the terminal."""
     os.system("cls" if os.name == "nt" else "clear")
 
