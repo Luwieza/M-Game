@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
@@ -28,21 +27,12 @@
             overflow: hidden; /* Prevent scrollbars */
         }
 
-        button {
-            width: 200px;
-            height: 40px;
-            background-color: #aa6737; /* Wood-like color */
-            border: 2px solid #cd9040; /* Sand-like color */
-            color: white;
-            text-transform: uppercase;
-            margin: 10px;
-            border-radius: 8px;
-            font-family: 'Pirata One', cursive;
-            cursor: pointer;
-        }
+        /**
+        * Default styles for xterm.js
+        */
 
         .xterm {
-            font-feature-settings: "liga" 0;
+            font-feature-settings: "liga"0;
             position: relative;
             user-select: none;
             -ms-user-select: none;
@@ -57,6 +47,10 @@
         .xterm .xterm-helpers {
             position: absolute;
             top: 0;
+            /**
+        * The z-index of the helpers must be higher than the canvases in order for
+        * IMEs to appear on top.
+        */
             z-index: 5;
         }
 
@@ -64,6 +58,7 @@
             padding: 0;
             border: 0;
             margin: 0;
+            /* Move textarea out of the screen to the far left, so that the cursor is not visible */
             position: absolute;
             opacity: 0;
             left: -9999em;
@@ -71,12 +66,14 @@
             width: 0;
             height: 0;
             z-index: -5;
+            /** Prevent wrapping so the IME appears against the textarea at the correct position */
             white-space: nowrap;
             overflow: hidden;
             resize: none;
         }
 
         .xterm .composition-view {
+            /* TODO: Composition position got messed up somewhere */
             background: #000;
             color: #FFF;
             display: none;
@@ -90,7 +87,8 @@
         }
 
         .xterm .xterm-viewport {
-            background-color: rgb(0, 0, 0);
+            /* On OS X this is required in order for the scroll bar to appear fully opaque */
+            background-color: #000;
             overflow-y: scroll;
             cursor: default;
             position: absolute;
@@ -98,6 +96,7 @@
             left: 0;
             top: 0;
             bottom: 0;
+            background-color: rgb(0, 0, 0);
             width: 730px;
         }
 
@@ -129,7 +128,9 @@
         }
 
         .xterm.enable-mouse-events {
+            /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
             cursor: default;
+            
         }
 
         .xterm.xterm-cursor-pointer {
@@ -137,6 +138,7 @@
         }
 
         .xterm.column-select.focus {
+            /* Column selection mode */
             cursor: crosshair;
         }
 
@@ -167,121 +169,32 @@
             text-decoration: underline;
         }
 
-        @media only screen and (max-width: 320px) {
-            body {
-                padding: 10px;
-            }
-            .xterm {
-                width: 100%;
-                height: 50vh;
-            }
-        }
-
-        .slider-container {
-            width: 100%;
-            overflow: hidden;
-            position: absolute;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px 0;
-        }
-
-        .slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slider img {
+        button {
             width: 200px;
-            height: 100px;
-            object-fit: cover;
-            margin: 0 10px;
-            transition: transform 0.3s ease-in-out;
+            height: 40px;
+            background-color: #df10e866;
+            border: 1px solid grey;
+            color: white;
+            text-transform: uppercase;
+            margin: 10px;
+            border-radius: 8px;
         }
 
-        .slider img:hover {
-            transform: scale(1.1);
-        }
-
-        .slide-left, .slide-right {
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            z-index: 10;
-        }
-
-        .slide-left {
-            left: 10px;
-        }
-
-        .slide-right {
-            right: 10px;
-        }
+        @media only screen and (max-width: 320px) {
+    div {
+        padding: inherit;
+        flex: inherit;
+        width: 130%;
+        height: 54vh;
+    }
+    .xterm.enable-mouse-events {
+        width: 50px;
+        height: 50%;
+    }
+    }
     </style>
 </head>
 
-<body>
-    <div id="terminal"></div>
-    <button id="click-me-button">PLAY GAME</button>
-    
-    <div class="slider-container">
-        <div class="slide-left">&lt;</div>
-        <div class="slider">
-            <img src="https://img.freepik.com/premium-photo/pirate-ship-is-water-with-flags-flying-from-top_1208590-47895.jpg?w=1800" alt="Pirate 1">
-            <img src="https://img.freepik.com/premium-photo/3d-rendered-photos-fantasy-ship-pirates_1208590-48057.jpg?w=1800" alt="Pirate 2">
-            <img src="https://img.freepik.com/premium-photo/3d-rendered-photos-fantasy-ship-pirates_1208590-48042.jpg?w=1800" alt="Pirate 3">
-            <img src="https://img.freepik.com/free-photo/digital-art-style-pirate-character-portrait_23-2151486785.jpg?t=st=1726389511~exp=1726393111~hmac=d78518363651ee38f1bcbc0e7889a3d731a6102dac8401569cfa5ec76ec8df44&w=1380" alt="Pirate 4">
-            <img src="https://img.freepik.com/premium-photo/large-ship-with-large-wooden-hull-large-group-people-water_1276913-58980.jpg?w=1800" alt="Pirate 5">
-            <img src="https://img.freepik.com/free-photo/view-boat-flames_23-2150785238.jpg?t=st=1726390206~exp=1726393806~hmac=83a304fb0b6f0d7f6f6a26141370c62e94a50d24557fcf1a9f6d2cce5c21241d&w=1380" alt="Pirate 6">
-            <img src="https://img.freepik.com/free-photo/bermuda-triangle-with-mystical-neon_23-2151628200.jpg?t=st=1726386942~exp=1726390542~hmac=56a00423d640687cb7622dd0d3b8db6bd17066224ad52adc3e68e96601d88b1b&w=1380" alt="Pirate 7">
-            <img src="https://img.freepik.com/free-photo/view-boat-flames_23-2150785242.jpg?t=st=1726390580~exp=1726394180~hmac=d7bb756295bb47a712040ca2a21f676beec1fd488b773857867803d3c34fb721&w=1380" alt="Pirate 8">
-        </div>
-        <div class="slide-right">&gt;</div>
-    </div>
-
-    <script>
-        // Initialize xterm.js
-        const term = new Terminal();
-        term.open(document.getElementById('terminal'));
-        // Add any additional xterm.js setup here
-
-        // JavaScript for sliding images
-        const slider = document.querySelector('.slider');
-        const slideLeft = document.querySelector('.slide-left');
-        const slideRight = document.querySelector('.slide-right');
-        let index = 0;
-        const totalImages = document.querySelectorAll('.slider img').length;
-        const imageWidth = document.querySelector('.slider img').offsetWidth + 20; // image width + margin
-
-        function updateSlider() {
-            const offset = -index * imageWidth;
-            slider.style.transform = `translateX(${offset}px)`;
-        }
-
-        slideRight.addEventListener('click', () => {
-            index = (index + 1) % totalImages;
-            updateSlider();
-        });
-
-        slideLeft.addEventListener('click', () => {
-            index = (index - 1 + totalImages) % totalImages;
-            updateSlider();
-        });
-
-        // JavaScript to change button functionality
-        document.getElementById('click-me-button').addEventListener('click', function() {
-            alert("Button clicked!");
-        });
-    </script>
-</body>
+@{body}
 
 </html>
