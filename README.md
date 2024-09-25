@@ -22,7 +22,7 @@ Check out the live project here
 
 This Battleship game serves as Portfolio Project 3 - Python Essentials for the Diploma in Full Stack Software Development at Code Institute. The focus of this project is to develop a command-line application that facilitates the management of a common dataset within a specific domain.
 
-The Battleship game is implemented as a Python Terminal Game, hosted on Heroku. 
+The Battleship game is implemented as a Python Terminal Game, hosted on Heroku.
 
 In this game, players engage on grids where each side has a fleet of battleships hidden from their opponent. The objective is to call shots at the opposing player's ships and eventually eliminate their fleet. The application features a functioning battleship game in which a single player competes against the computer on a 9 x 9 grid. Players' ships are pre-positioned on the board when the game initiates, and helpful information is presented throughout gameplay. The upper board displays the player's ship positions and their attempts, while the lower board records their guessing history.
 
@@ -56,7 +56,7 @@ Current Features
 - A prompt for the player to input their name.
 !features_03
 
-- Additional text displaying the loading status of the game. 
+- Additional text displaying the loading status of the game.
 !features_04
 
 - An introduction that outlines the game instructions.
@@ -76,7 +76,7 @@ Current Features
 - A game over notification to indicate the end of the game.
 !features_14
 
-In this game, players interact with two game boards. First, they must set up their ships on one board and then attempt to guess the locations of the ships placed on the opponent's board. 
+In this game, players interact with two game boards. First, they must set up their ships on one board and then attempt to guess the locations of the ships placed on the opponent's board.
 
 !board-game !game_board
 
@@ -112,7 +112,7 @@ Deployment
     - Click the connect button.
     - Under "Manual Deploy", choose the option to 'Deploy Branch'.
     - Finally, click 'Open App' on the right side of the screen, which should open the app in a new tab.
-    - The live link can be accessed here - https://battleship-game.herokuapp.com/
+    - The live link can be accessed here - https://m-game-48e6e2a0f27b.herokuapp.com/
 
 Acknowledgments
 
