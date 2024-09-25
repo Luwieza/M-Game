@@ -75,9 +75,13 @@ def start_game(turns, ships):
     clear()
     create_random_ships(hidden_board, ships)
     create_random_ships(player_board, ships)
-    print(
-        f"Game Mode: {'Easy' if turns == 15 else 'Medium' if turns == 10 else 'Hard'}"
+    game_mode = (
+         'Easy' if turns == 15
+         else 'Medium' if turns == 10
+         else 'Hard'
     )
+    print(f"Game Mode: {game_mode}")
+
     print(f"You have {turns} turns to find {ships} ships.")
     play_game(turns)
 
@@ -86,7 +90,10 @@ def instructions():
     """Show game instructions."""
     print("Welcome to BATTLESHIP!")
     print("You have a set number of turns to find the computer's ships.")
-    print("Use row numbers (1-9) and column letters (A-I) to guess ship locations.")
+    print(
+          "Use row numbers (1-9) and column letters (A-I) "
+          "to guess ship locations."
+    )
     print("Good luck and have fun!")
     input("Press Enter to start the game.")
     choose_difficulty()
@@ -109,14 +116,18 @@ def computer_guess():
         computer_column = randint(0, 9)
     elif player_board[computer_row][computer_column] == "✩":
         print(
-            f"The computer guessed row {computer_row+1} and column {numbers_to_letters[computer_column]}"
+              f"The computer guessed row {computer_row + 1} "
+              f"and column {numbers_to_letters[computer_column]}"
         )
+
         print("Your battleship has been hit!")
         player_board[computer_row][computer_column] = "★"
     else:
         print(
-            f"The computer guessed row {computer_row+1} and column {numbers_to_letters[computer_column]}"
+              f"The computer guessed row {computer_row + 1} "
+              f"and column {numbers_to_letters[computer_column]}"
         )
+
         print("The computer missed!")
         player_board[computer_row][computer_column] = "-"
 
