@@ -1,7 +1,7 @@
 from random import randint
 import time
 import os
-from colorama import Fore
+
 
 # Initialize boards
 hidden_board = [["_"] * 9 for x in range(9)]
@@ -201,3 +201,4 @@ def play_again():
 
 if __name__ == "__main__":
     start_menu()
+
